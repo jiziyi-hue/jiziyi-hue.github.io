@@ -88,6 +88,12 @@
   .flow b { background: rgba(255,255,255,.14); padding: 5px 10px; border-radius: 8px; font-weight: 700; }
   .flow em { font-style: normal; opacity: .6; }
 
+  .split { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; }
+  .sm { background: rgba(0,0,0,.25); border-radius: 20px; padding: 24px; }
+  .sm h4 { font-size: 22px; font-weight: 900; margin: 6px 0 10px; line-height: 1.25; }
+  .sm .note { font-size: 13px; opacity: .7; margin: 8px 0 0; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
   /* big number tiles */
   .big { font-size: clamp(48px, 6vw, 76px); font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 14px 0 8px; }
   .tile-foot { font-weight: 700; opacity: .9; }
@@ -168,7 +174,9 @@
   <div class="bento">
 
     <!-- OpenRA MCP -->
-    <article class="card navy s4">
+    <article class="card navy s6">
+     <div class="split">
+     <div>
       <div class="kicker"><span data-zh>01 · 游戏 AI · 2026.06</span><span data-en>01 · Game AI · Jun 2026</span></div>
       <h3>OpenRA MCP<small><span data-zh>一句话指挥 RTS 战斗的 AI 战术副官</span><span data-en>An AI co-pilot that runs RTS tactics from one sentence</span></small></h3>
       <div class="cmd">
@@ -193,23 +201,25 @@
         <a href="https://github.com/jiziyi-hue/openramcp" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://doi.org/10.5281/zenodo.20393182" target="_blank" rel="noopener"><span data-zh>预印本 ↗</span><span data-en>Preprint ↗</span></a>
       </div>
+     </div>
+     <div class="sm">
+        <div class="kicker" style="color:var(--lime);opacity:1"><span data-zh>进阶 · 自训小模型</span><span data-en>Next step · my own small model</span></div>
+        <h4><span data-zh>用 0.5B 小模型替代大模型 API</span><span data-en>Replacing the LLM API with a 0.5B model</span></h4>
+        <p data-zh>用大模型生成约 1,000 条「中文指令 → JSON 命令」数据，对 Qwen2.5-0.5B 做 QLoRA 微调，让一个本地小模型就能把玩家的话翻译成引擎可执行的命令，不再依赖付费 API。</p>
+        <p data-en>I used an LLM to generate ~1,000 “Chinese command → JSON order” pairs and QLoRA-fine-tuned Qwen2.5-0.5B, so a small local model can translate what the player says into engine-ready orders without a paid API.</p>
+        <div class="mini-stats">
+          <div><b>100%</b><span data-zh>输出合法 JSON</span><span data-en>valid JSON</span></div>
+          <div><b>99%</b><span data-zh>意图识别准确</span><span data-en>intent accuracy</span></div>
+          <div><b>~0.8GB</b><span data-zh>本地推理显存</span><span data-en>memory to run</span></div>
+        </div>
+        <p class="note" data-zh>v4 版本，100 条留出指令评测；完整命令逐字一致率 50%，剩余差异多为兵种筛选的细微分歧。</p>
+        <p class="note" data-en>v4, evaluated on 100 held-out commands; 50% match the reference order exactly, most misses are minor unit-filter differences.</p>
+     </div>
+     </div>
     </article>
 
-    <div class="s2 stack">
-      <div class="card orange">
-        <div class="kicker"><span data-zh>皇帝测试</span><span data-en>Emperor quiz</span></div>
-        <div class="big">143,040</div>
-        <div class="tile-foot"><span data-zh>上线 16 天累计完成测试次数</span><span data-en>completed sessions in 16 days</span></div>
-      </div>
-      <div class="card lime">
-        <div class="kicker"><span data-zh>单日峰值</span><span data-en>Peak day</span></div>
-        <div class="big">88,196</div>
-        <div class="tile-foot"><span data-zh>上线第 2 天</span><span data-en>on day 2</span></div>
-      </div>
-    </div>
-
     <!-- Emperor test -->
-    <article class="card cream s6">
+    <article class="card cream s4">
       <div class="kicker"><span data-zh>02 · 网页游戏 · 2026.04 · 独立策划、开发与运营</span><span data-en>02 · Web game · Apr 2026 · solo design, build &amp; ops</span></div>
       <h3><span data-zh>测测你骨子里最像哪位中国皇帝</span><span data-en>Which Chinese emperor are you?</span>
         <small><span data-zh>36 道情境题 · 50 位皇帝 · 结果图鉴，专为截图分享设计</span><span data-en>36 scenarios · 50 emperors · a collectible gallery built to be screenshotted and shared</span></small></h3>
@@ -243,6 +253,24 @@
       <div class="chips"><span>JavaScript</span><span>Supabase</span><span>Google Analytics</span><span><span data-zh>增长复盘</span><span data-en>Growth</span></span></div>
       <div class="links"><a href="https://github.com/jiziyi-hue/huangditest" target="_blank" rel="noopener">GitHub ↗</a></div>
     </article>
+
+    <div class="s2 stack">
+      <div class="card orange">
+        <div class="kicker"><span data-zh>皇帝测试 · 累计</span><span data-en>Emperor quiz · total</span></div>
+        <div class="big">143,040</div>
+        <div class="tile-foot"><span data-zh>次完成测试，上线 16 天</span><span data-en>completed sessions in 16 days</span></div>
+      </div>
+      <div class="card lime">
+        <div class="kicker"><span data-zh>皇帝测试 · 单日峰值</span><span data-en>Emperor quiz · peak day</span></div>
+        <div class="big">88,196</div>
+        <div class="tile-foot"><span data-zh>次，上线第 2 天</span><span data-en>sessions on day 2</span></div>
+      </div>
+      <div class="card ink">
+        <div class="kicker"><span data-zh>皇帝测试 · 认真程度</span><span data-en>Emperor quiz · engagement</span></div>
+        <div class="big">4 min</div>
+        <div class="tile-foot"><span data-zh>作答中位时长，63% 选完整版</span><span data-en>median session, 63% chose full mode</span></div>
+      </div>
+    </div>
 
     <!-- Linxin -->
     <article class="card green s3">
