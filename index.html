@@ -232,14 +232,14 @@
       <h3><span data-zh>测测你骨子里最像哪位中国皇帝</span><span data-en>Which Chinese emperor are you?</span>
         <small><span data-zh>36 道情境题 · 50 位皇帝 · 结果图鉴，专为截图分享设计</span><span data-en>36 scenarios · 50 emperors · a collectible gallery built to be screenshotted and shared</span></small></h3>
       <div class="chart" aria-label="daily completions chart">
-        <svg viewBox="0 0 1000 220" role="img">
+        <svg viewBox="0 0 1000 300" role="img">
           <title>Daily completed sessions, 13–28 Apr 2026</title>
           <g id="bars"></g>
-          <line x1="20" y1="185" x2="980" y2="185" stroke="#e0cdb8"/>
+          <line x1="20" y1="255" x2="980" y2="255" stroke="#e0cdb8"/>
         </svg>
         <div class="cap">
-          <span data-zh>每日完成测试次数（2026.04.13 – 04.28，自建埋点表）。灰色是 4 月 20 日停服之后。</span>
-          <span data-en>Daily completed sessions, 13–28 Apr 2026, from my own event table. Grey bars: after the server shutdown on 20 Apr.</span>
+          <span data-zh>上线第一周每日完成测试次数（自建埋点表）。灰色是 4 月 20 日停服当天；之后一周日均只剩约 40 次。</span>
+          <span data-en>Daily completed sessions in the launch week (my own event table). Grey: 20 Apr, the day the server was shut down; the following week averaged ~40 a day.</span>
         </div>
       </div>
       <ul data-zh>
@@ -384,28 +384,30 @@
 </div>
 
 <script>
-  // Daily completed sessions, 2026-04-13 .. 2026-04-28 (from game_analytics_rows.csv)
-  const daily = [4115, 88196, 8500, 19548, 7864, 10558, 3745, 189, 59, 64, 62, 24, 20, 10, 29, 57];
+  // Daily completed sessions, 2026-04-13 .. 2026-04-20 (from game_analytics_rows.csv).
+  // Only the live week is drawn; 4/20 is the shutdown day. After it, the daily
+  // average was ~40 (59, 64, 62, 24, 20, 10, 29, 57 for 4/21-4/28), noted in the caption.
+  const daily = [4115, 88196, 8500, 19548, 7864, 10558, 3745, 189];
   const g = document.getElementById('bars');
-  const max = Math.max(...daily), x0 = 20, w = 960 / daily.length, h = 155, base = 185;
+  const max = Math.max(...daily), x0 = 20, w = 960 / daily.length, h = 215, base = 255;
   const NS = 'http://www.w3.org/2000/svg';
   daily.forEach((v, i) => {
     const bh = Math.max(2, v / max * h);
     const r = document.createElementNS(NS, 'rect');
-    r.setAttribute('x', x0 + i * w + 6); r.setAttribute('y', base - bh);
-    r.setAttribute('width', w - 12); r.setAttribute('height', bh); r.setAttribute('rx', 6);
-    r.setAttribute('fill', i >= 7 ? '#c9bfb3' : '#ff6a1f');
+    r.setAttribute('x', x0 + i * w + 14); r.setAttribute('y', base - bh);
+    r.setAttribute('width', w - 28); r.setAttribute('height', bh); r.setAttribute('rx', 6);
+    r.setAttribute('fill', i === daily.length - 1 ? '#c9bfb3' : '#ff6a1f');
     const t = document.createElementNS(NS, 'title'); t.textContent = `4/${13 + i}: ${v.toLocaleString()}`;
     r.appendChild(t); g.appendChild(r);
-    if (v > 5000 || i === 6 || i === 7) {
+    {
       const lab = document.createElementNS(NS, 'text');
       lab.setAttribute('x', x0 + i * w + w / 2); lab.setAttribute('y', base - bh - 7);
       lab.setAttribute('text-anchor', 'middle'); lab.setAttribute('font-size', '15'); lab.setAttribute('font-weight', '700'); lab.setAttribute('fill', '#333');
       lab.textContent = v.toLocaleString(); g.appendChild(lab);
     }
-    if (i % 3 === 0) {
+    {
       const d = document.createElementNS(NS, 'text');
-      d.setAttribute('x', x0 + i * w + w / 2); d.setAttribute('y', 207);
+      d.setAttribute('x', x0 + i * w + w / 2); d.setAttribute("y", 280);
       d.setAttribute('text-anchor', 'middle'); d.setAttribute('font-size', '14'); d.setAttribute('fill', '#8a7f73');
       d.textContent = `4/${13 + i}`; g.appendChild(d);
     }
