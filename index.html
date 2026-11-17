@@ -238,17 +238,19 @@
           <line x1="20" y1="255" x2="980" y2="255" stroke="#e0cdb8"/>
         </svg>
         <div class="cap">
-          <span data-zh>上线第一周每日完成测试次数（自建埋点表）。灰色是 4 月 20 日停服当天；之后一周日均只剩约 40 次。</span>
-          <span data-en>Daily completed sessions in the launch week (my own event table). Grey: 20 Apr, the day the server was shut down; the following week averaged ~40 a day.</span>
+          <span data-zh>4/13 – 4/20 每日完成测试次数（自建数据库从 4/13 开始记录，峰值在 4/14）。灰色是 4 月 20 日停服当天；之后一周日均只剩约 40 次。</span>
+          <span data-en>Daily completed sessions, 13–20 Apr (my own database started logging on 13 Apr; peak on 14 Apr). Grey: 20 Apr, the day the server was shut down; the following week averaged ~40 a day.</span>
         </div>
       </div>
       <ul data-zh>
-        <li>完整版占 <b>63%</b>，作答时长中位数 <b>4 分钟</b>：多数人愿意认真做完。</li>
-        <li>接入 Google Analytics，并自建逐题埋点（模式、时长、每题答案），用来分析结果分布和题目区分度。</li>
+        <li><b>传播：</b>63% 的用户是在 App 内置浏览器里打开的（多为分享链接），豆瓣是最大的外部来源（约 5,400 人）。</li>
+        <li><b>认真程度：</b>完整版占 <b>63%</b>，作答时长中位数 <b>4 分钟</b>，GA 投入率 69%。</li>
+        <li>接入 Google Analytics，并自建逐题埋点（模式、时长、每题答案），用来分析结果分布和题目区分度。GA 与数据库都在上线一段时间后才接入，实际数字更高。</li>
       </ul>
       <ul data-en>
-        <li><b>63%</b> chose the full version; median session <b>4 minutes</b>, so most people finished it properly.</li>
-        <li>Google Analytics plus my own per-answer event table (mode, duration, each answer) to study result distribution and how well each question separates players.</li>
+        <li><b>Spread:</b> 63% of users opened it inside an app's built-in browser (mostly shared links); Douban was the largest outside source (~5,400 users).</li>
+        <li><b>Engagement:</b> <b>63%</b> chose the full version, median session <b>4 minutes</b>, GA engagement rate 69%.</li>
+        <li>Google Analytics plus my own per-answer event table (mode, duration, each answer). Both were added some time after launch, so the real numbers are higher.</li>
       </ul>
       <div class="retro" data-zh>
         <b>复盘：</b>服务器按流量计费太贵，停服后日完成量从 3,745 掉到 189；本可以用免费静态托管 + 轻量后端。
@@ -264,19 +266,19 @@
 
     <div class="s2 stack">
       <div class="card orange">
-        <div class="kicker"><span data-zh>皇帝测试 · 累计</span><span data-en>Emperor quiz · total</span></div>
-        <div class="big">143,040</div>
-        <div class="tile-foot"><span data-zh>次完成测试，上线 16 天</span><span data-en>completed sessions in 16 days</span></div>
+        <div class="kicker"><span data-zh>皇帝测试 · 独立用户</span><span data-en>Emperor quiz · unique users</span></div>
+        <div class="big">127,214</div>
+        <div class="tile-foot"><span data-zh>2026 年 4 月，Google Analytics</span><span data-en>in April 2026, Google Analytics</span></div>
       </div>
       <div class="card lime">
-        <div class="kicker"><span data-zh>皇帝测试 · 单日峰值</span><span data-en>Emperor quiz · peak day</span></div>
-        <div class="big">88,196</div>
-        <div class="tile-foot"><span data-zh>次，上线第 2 天</span><span data-en>sessions on day 2</span></div>
+        <div class="kicker"><span data-zh>皇帝测试 · 完成次数</span><span data-en>Emperor quiz · completions</span></div>
+        <div class="big">143,040</div>
+        <div class="tile-foot"><span data-zh>次完成测试，数据库 16 天记录</span><span data-en>completed sessions, 16 days of my own logs</span></div>
       </div>
       <div class="card ink">
-        <div class="kicker"><span data-zh>皇帝测试 · 认真程度</span><span data-en>Emperor quiz · engagement</span></div>
-        <div class="big">4 min</div>
-        <div class="tile-foot"><span data-zh>作答中位时长，63% 选完整版</span><span data-en>median session, 63% chose full mode</span></div>
+        <div class="kicker"><span data-zh>皇帝测试 · 投入程度</span><span data-en>Emperor quiz · engagement</span></div>
+        <div class="big">9 min</div>
+        <div class="tile-foot"><span data-zh>人均投入时长，84% 来自手机</span><span data-en>avg engagement per user, 84% on mobile</span></div>
       </div>
     </div>
 
