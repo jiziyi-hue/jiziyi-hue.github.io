@@ -212,6 +212,14 @@
           <div><b>99%</b><span data-zh>意图识别准确</span><span data-en>intent accuracy</span></div>
           <div><b>~0.8GB</b><span data-zh>本地推理显存</span><span data-en>memory to run</span></div>
         </div>
+        <ul data-zh style="font-size:14px;margin-top:14px">
+          <li><b>分数高 ≠ 能用：</b>v1–v3 分数不低，但对准的是已废弃的指令格式，约 80% 输出引擎不认；v4 改为对准真实格式，输出全部可执行。</li>
+          <li><b>数据配比是关键：</b>不控比例，少见指令学不会；全部压平，常见的「进攻」又变差；常见类上限约为少见类 2 倍时两头兼顾。</li>
+        </ul>
+        <ul data-en style="font-size:14px;margin-top:14px">
+          <li><b>High score ≠ usable:</b> v1–v3 scored well against a deprecated command format, so ~80% of outputs were rejected by the engine; v4 targets the live format and every output executes.</li>
+          <li><b>Class balance is the lever:</b> no cap starves rare commands, an equal cap hurts the common “attack”; capping the common class at ~2× the rare ones gets both.</li>
+        </ul>
         <p class="note" data-zh>v4 版本，100 条留出指令评测；完整命令逐字一致率 50%，剩余差异多为兵种筛选的细微分歧。</p>
         <p class="note" data-en>v4, evaluated on 100 held-out commands; 50% match the reference order exactly, most misses are minor unit-filter differences.</p>
      </div>
