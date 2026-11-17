@@ -4,284 +4,373 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>姬子易 Ziyi Ji — Game Product · AI</title>
-<meta name="description" content="姬子易 Ziyi Ji：产品方向求职，独立做过 14 万次完成量的网页游戏、AI 日记机器人与 LLM 游戏副官。">
+<meta name="description" content="姬子易 Ziyi Ji：游戏产品 / AI 游戏应用。LLM RTS 战术副官、14 万次完成的网页测试游戏、陪诊师小程序、AI 日记机器人。">
 <style>
   :root {
-    --bg: #fbfaf7; --fg: #1d1d1f; --muted: #6b6b70; --line: #e4e1da;
-    --accent: #1f4e79; --accent-soft: #e8eef5; --card: #ffffff;
+    --bg: #f4f3ef; --fg: #111111; --muted: #6e6e73; --card: #ffffff; --line: #e3e1db;
+    --navy: #1b2a6b; --orange: #ff6a1f; --cream: #fff1e3; --green: #0d7a52; --purple: #5b3df5; --lime: #c8f560;
+    --r: 26px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.7 -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font: 16px/1.65 -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
-  header.top {
-    position: sticky; top: 0; z-index: 5; background: rgba(251,250,247,.92);
-    backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* top bar */
+  .top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .logo { font-weight: 900; letter-spacing: -.5px; font-size: 18px; text-decoration: none; }
+  .logo i { font-style: normal; color: var(--orange); }
+  .top nav { display: flex; gap: 6px; align-items: center; }
+  .top nav a { text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 999px; color: var(--muted); }
+  .top nav a:hover { background: #fff; color: var(--fg); }
+  .lang { border: 0; background: var(--fg); color: #fff; border-radius: 999px; padding: 7px 14px; font-size: 13px; cursor: pointer; font-weight: 600; }
+
+  /* hero */
+  .hero { padding: 56px 0 40px; }
+  .hero .hello { font-size: 15px; color: var(--muted); margin-bottom: 10px; }
+  .hero h1 {
+    margin: 0; font-weight: 900; line-height: .98; letter-spacing: -2px;
+    font-size: clamp(56px, 10vw, 128px);
   }
-  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  header.top nav a { color: var(--muted); text-decoration: none; margin-right: 18px; font-size: 14px; }
-  header.top nav a:hover { color: var(--accent); }
-  .lang {
-    border: 1px solid var(--line); background: var(--card); border-radius: 999px;
-    padding: 4px 12px; font-size: 13px; cursor: pointer; color: var(--fg);
+  .hero h1 .dot { color: var(--orange); }
+  .hero .role { font-size: clamp(22px, 3.2vw, 36px); font-weight: 800; letter-spacing: -.5px; margin: 18px 0 18px; line-height: 1.25; }
+  .hero .role mark { background: var(--lime); padding: 0 .18em; border-radius: 6px; }
+  .hero p.lead { font-size: 18px; max-width: 700px; color: #333; margin: 0 0 28px; }
+  .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 20px; border-radius: 999px; font-weight: 700; text-decoration: none; font-size: 15px; transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.dark { background: var(--fg); color: #fff; }
+  .btn.light { background: #fff; border: 1px solid var(--line); }
+
+  /* bento */
+  .label { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 48px 0 16px; }
+  .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+  .bento > * { min-width: 0; }
+  .card a, .card i { overflow-wrap: anywhere; }
+  .card {
+    position: relative; border-radius: var(--r); padding: 30px; background: var(--card); overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .hero { padding: 72px 0 40px; }
-  .hero h1 { font-size: 42px; margin: 0; letter-spacing: -.5px; }
-  .hero .role { color: var(--accent); font-weight: 600; margin: 6px 0 18px; font-size: 18px; }
-  .hero p.lead { font-size: 18px; max-width: 680px; margin: 0 0 22px; }
-  .stats { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
-  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; min-width: 150px; }
-  .stat b { display: block; font-size: 24px; color: var(--accent); line-height: 1.2; }
-  .stat span { font-size: 13px; color: var(--muted); }
-  .links { margin-top: 22px; }
-  .links a {
-    display: inline-block; margin-right: 10px; margin-bottom: 8px; padding: 7px 14px; border-radius: 8px;
-    border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-size: 14px;
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -18px rgba(0,0,0,.25); }
+  .s2 { grid-column: span 2; } .s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s6 { grid-column: span 6; }
+  .kicker { font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; opacity: .7; }
+  .card h3 { font-size: 30px; line-height: 1.15; font-weight: 900; letter-spacing: -.5px; margin: 8px 0 10px; }
+  .card h3 small { display: block; font-size: 17px; font-weight: 700; letter-spacing: 0; opacity: .8; margin-top: 4px; }
+  .card p { margin: 0 0 12px; }
+  .card ul { margin: 6px 0 0; padding-left: 18px; }
+  .card li { margin-bottom: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .chips span { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.16); }
+  .links { margin-top: 18px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .links a { font-weight: 800; font-size: 14px; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 1px; }
+
+  .navy { background: var(--navy); color: #fff; }
+  .orange { background: var(--orange); color: #fff; }
+  .cream { background: var(--cream); }
+  .green { background: var(--green); color: #fff; }
+  .purple { background: var(--purple); color: #fff; }
+  .ink { background: var(--fg); color: #fff; }
+  .lime { background: var(--lime); }
+  .cream .chips span, .light .chips span, .lime .chips span { background: rgba(0,0,0,.07); }
+
+  /* OpenRA pipeline */
+  .cmd {
+    margin: 18px 0 8px; background: rgba(0,0,0,.28); border-radius: 16px; padding: 16px 18px;
+    font: 14px/1.6 ui-monospace, "Cascadia Code", Consolas, "Microsoft YaHei", monospace;
   }
-  .links a.primary { background: var(--accent); color: #fff; }
-  section { padding: 36px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 0 0 20px; }
-  .project { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-bottom: 18px; }
-  .project h3 { margin: 0; font-size: 20px; }
-  .project .meta { color: var(--muted); font-size: 13px; margin: 2px 0 12px; }
-  .project ul { margin: 8px 0 0; padding-left: 20px; }
-  .project li { margin-bottom: 4px; }
-  .tags { margin-top: 12px; }
-  .tags span { display: inline-block; background: var(--accent-soft); color: var(--accent); font-size: 12px; border-radius: 6px; padding: 2px 8px; margin: 0 6px 6px 0; }
-  .project a.more { font-size: 14px; color: var(--accent); }
-  .chart { margin: 16px 0 6px; }
-  .chart svg { width: 100%; height: auto; display: block; }
-  .chart .cap { font-size: 12px; color: var(--muted); }
-  .lesson { background: #fff7e8; border-left: 3px solid #d08a1b; padding: 10px 14px; border-radius: 6px; margin-top: 12px; font-size: 15px; }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .mini { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; font-size: 15px; }
-  .mini b { display: block; margin-bottom: 4px; }
-  .timeline .item { display: grid; grid-template-columns: 170px 1fr; gap: 16px; margin-bottom: 16px; }
-  .timeline .when { color: var(--muted); font-size: 14px; }
-  footer { padding: 36px 0 60px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
-  a { color: var(--accent); }
+  .cmd .you { color: var(--lime); }
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; font-weight: 700; }
+  .flow b { background: rgba(255,255,255,.14); padding: 5px 10px; border-radius: 8px; font-weight: 700; }
+  .flow em { font-style: normal; opacity: .6; }
+
+  /* big number tiles */
+  .big { font-size: clamp(48px, 6vw, 76px); font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 14px 0 8px; }
+  .tile-foot { font-weight: 700; opacity: .9; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .stack .card { flex: 1; }
+
+  /* chart */
+  .chart svg { width: 100%; height: auto; display: block; margin: 8px 0 4px; }
+  .cap { font-size: 13px; color: var(--muted); }
+  .retro { margin-top: 16px; background: #fff; border-radius: 16px; padding: 14px 16px; font-size: 15px; }
+  .retro b { color: var(--orange); }
+
+  .verdict { margin-top: 16px; background: rgba(0,0,0,.2); border-radius: 16px; padding: 14px 16px; font-size: 15px; }
+  .mini-stats { display: flex; gap: 22px; flex-wrap: wrap; margin: 16px 0 6px; }
+  .mini-stats div { font-size: 13px; opacity: .85; }
+  .mini-stats b { display: block; font-size: 30px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; opacity: 1; }
+
+  /* experience */
+  .tl { display: grid; gap: 14px; margin-top: 10px; }
+  .tl div { display: grid; grid-template-columns: 150px 1fr; gap: 14px; }
+  .tl .when { font-size: 13px; opacity: .65; padding-top: 2px; }
+  .tl b { display: block; }
+  .tl span.d { font-size: 14px; opacity: .85; }
+
+  footer { margin: 16px 0 60px; }
+  .contact h2 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 6px 0 22px; }
+  .contact .btn.dark { background: #fff; color: var(--fg); }
+  .contact .btn.light { background: transparent; color: #fff; border-color: rgba(255,255,255,.35); }
+  .fine { text-align: center; color: var(--muted); font-size: 13px; margin-top: 22px; }
+
   [data-en] { display: none; }
   body.en [data-zh] { display: none; }
   body.en [data-en] { display: revert; }
-  @media (max-width: 640px) {
-    .hero h1 { font-size: 32px; }
-    .grid2 { grid-template-columns: 1fr; }
-    .timeline .item { grid-template-columns: 1fr; gap: 2px; }
-    header.top nav { display: none; }
+
+  @media (max-width: 900px) {
+    .s2, .s3, .s4 { grid-column: span 6; }
+    .top nav a { display: none; }
+    .card { padding: 24px; }
+    .tl div { grid-template-columns: 1fr; gap: 0; }
   }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header class="top">
-  <div class="wrap">
+  <header class="top">
+    <a class="logo" href="#">ZIYI JI<i>.</i></a>
     <nav>
-      <a href="#projects"><span data-zh>项目</span><span data-en>Projects</span></a>
-      <a href="#research"><span data-zh>研究</span><span data-en>Research</span></a>
-      <a href="#experience"><span data-zh>经历</span><span data-en>Experience</span></a>
+      <a href="#projects"><span data-zh>项目</span><span data-en>Work</span></a>
+      <a href="#about"><span data-zh>经历</span><span data-en>About</span></a>
       <a href="#contact"><span data-zh>联系</span><span data-en>Contact</span></a>
+      <button class="lang" id="langBtn" type="button">EN</button>
     </nav>
-    <button class="lang" id="langBtn" type="button">EN</button>
-  </div>
-</header>
+  </header>
 
-<main class="wrap">
-
-  <section class="hero" style="border-top:0">
-    <h1><span data-zh>姬子易</span><span data-en>Ziyi Ji</span></h1>
+  <section class="hero">
+    <div class="hello"><span data-zh>你好，我是</span><span data-en>Hi, I'm</span></div>
+    <h1><span data-zh>姬子易<span class="dot">.</span></span><span data-en>Ziyi Ji<span class="dot">.</span></span></h1>
     <div class="role">
-      <span data-zh>游戏产品 · AI 游戏应用</span>
-      <span data-en>Game product · AI-powered game experiences</span>
+      <span data-zh>想做<mark>游戏产品</mark>，尤其是玩家和 AI 一起玩的那种。</span>
+      <span data-en>Aspiring <mark>game product</mark> person, most interested in games where players and AI play together.</span>
     </div>
     <p class="lead" data-zh>
-      我喜欢把一个想法从 0 做到能被真实用户使用，再用数据看它到底行不行。
-      数据科学硕士在读（马来西亚理工大学），做过 3 年教培一线和创业，现在主要做游戏和 AI 相关的产品原型，尤其关注玩家与 AI 协作的玩法。
+      我习惯把一个想法独立做到真实用户能用，再看数据和反馈判断它行不行。数据科学硕士在读（马来西亚理工大学），此前做过 3 年教培一线和创业。
     </p>
     <p class="lead" data-en>
-      I like taking an idea from zero to something real people use, then letting the data tell me whether it works.
-      M.Sc. Data Science candidate at Universiti Teknologi Malaysia, three years in education and running my own
-      tutoring business, now building game and AI prototypes, especially gameplay where players and AI work together.
+      I take ideas from zero to something real people use, then let data and feedback decide whether it works. M.Sc. Data Science
+      candidate at Universiti Teknologi Malaysia, after three years of teaching and running my own tutoring business.
     </p>
-    <div class="stats">
-      <div class="stat"><b>143,040</b><span data-zh>网页游戏 16 天完成测试次数</span><span data-en>completed sessions in 16 days</span></div>
-      <div class="stat"><b>88,196</b><span data-zh>上线第 2 天单日峰值</span><span data-en>peak sessions on day 2</span></div>
-      <div class="stat"><b>40 → 200+</b><span data-zh>教培班级规模增长</span><span data-en>students, class growth as a teacher</span></div>
-    </div>
-    <div class="links">
-      <a class="primary" href="mailto:jiziyi@graduate.utm.my"><span data-zh>发邮件</span><span data-en>Email me</span></a>
-      <a href="https://github.com/jiziyi-hue" target="_blank" rel="noopener">GitHub</a>
+    <div class="cta">
+      <a class="btn dark" href="mailto:jiziyi@graduate.utm.my"><span data-zh>发邮件给我 →</span><span data-en>Email me →</span></a>
+      <a class="btn light" href="https://github.com/jiziyi-hue" target="_blank" rel="noopener">GitHub</a>
     </div>
   </section>
 
-  <section id="projects">
-    <h2><span data-zh>项目</span><span data-en>Projects</span></h2>
+  <div class="label" id="projects"><span data-zh>做过的东西</span><span data-en>Selected work</span></div>
+
+  <div class="bento">
 
     <!-- OpenRA MCP -->
-    <article class="project">
-      <h3>OpenRA MCP <span data-zh>· 自然语言 RTS 战术副官</span><span data-en>· natural-language RTS co-pilot</span></h3>
-      <div class="meta"><span data-zh>2026.06 · 独立研究与开发 · 预印本 + 开源</span><span data-en>Jun 2026 · solo research · preprint + open source</span></div>
-      <p data-zh>玩家用一句话说出战术意图，比如「两队钳形包抄，一队佯攻」，LLM 把它转成结构化的 MCP 调用，由 OpenRA 引擎执行。</p>
-      <p data-en>Say the manoeuvre in plain language — “pincer with two squads, feint with the third” — and an LLM turns it into structured MCP calls that the OpenRA engine executes.</p>
-      <ul data-zh>
-        <li>用 17 个工具 + 2 个小队原语，实现钳形攻势、佯攻偷袭、路线约束、分时进攻等 10 类战术。</li>
-        <li>设计取向是「人在回路」：玩家保留战略判断，AI 只做执行层的副驾驶，而不是替玩家打游戏。</li>
-      </ul>
-      <ul data-en>
-        <li>17 tools + 2 squad primitives express 10 tactics: pincer, feint-and-raid, route constraints, timed assaults.</li>
-        <li>Human-in-the-loop by design: the player keeps strategy; the AI is a co-pilot for execution, not a replacement player.</li>
-      </ul>
-      <div class="tags"><span>Python</span><span>MCP</span><span>LLM</span><span>Game AI</span></div>
-      <a class="more" href="https://github.com/jiziyi-hue/openramcp" target="_blank" rel="noopener">GitHub →</a>
-      &nbsp;·&nbsp;
-      <a class="more" href="https://zenodo.org/records/20393182" target="_blank" rel="noopener"><span data-zh>预印本 →</span><span data-en>Preprint →</span></a>
-    </article>
-
-    <!-- Emperor test -->
-    <article class="project">
-      <h3><span data-zh>「你最像哪位中国皇帝？」人格测试</span><span data-en>“Which Chinese Emperor Are You?”</span></h3>
-      <div class="meta"><span data-zh>2026.04 · 独立策划、开发与运营 · 网页小游戏</span><span data-en>Apr 2026 · solo design, build &amp; operations · web game</span></div>
-      <p data-zh>36 道历史情境题（另有 12 题简版），根据你的选择匹配一位中国皇帝，并附皇帝图鉴。</p>
-      <p data-en>A 36-scenario quiz (plus a 12-question quick mode) that matches you to a Chinese emperor, with a collectible gallery.</p>
-
-      <div class="chart" aria-label="daily completions chart">
-        <svg viewBox="0 0 640 190" role="img">
-          <title>Daily completed sessions, 13–28 Apr 2026</title>
-          <g id="bars"></g>
-          <line x1="30" y1="160" x2="630" y2="160" stroke="#c9c5bc"/>
-        </svg>
-        <div class="cap">
-          <span data-zh>每日完成测试次数（2026.04.13 – 04.28，数据来自自建埋点表）。4 月 20 日的断崖是服务器停服造成的。</span>
-          <span data-en>Daily completed sessions, 13–28 Apr 2026 (from my own event table). The cliff on 20 Apr is the server being shut down.</span>
+    <article class="card navy s4">
+      <div class="kicker"><span data-zh>01 · 游戏 AI · 2026.06</span><span data-en>01 · Game AI · Jun 2026</span></div>
+      <h3>OpenRA MCP<small><span data-zh>一句话指挥 RTS 战斗的 AI 战术副官</span><span data-en>An AI co-pilot that runs RTS tactics from one sentence</span></small></h3>
+      <div class="cmd">
+        <div class="you"><span data-zh>&gt; 两队钳形包抄，一队佯攻</span><span data-en>&gt; pincer with two squads, feint with the third</span></div>
+        <div class="flow">
+          <b><span data-zh>玩家意图</span><span data-en>Player intent</span></b><em>→</em>
+          <b>LLM</b><em>→</em>
+          <b><span data-zh>17 个 MCP 工具</span><span data-en>17 MCP tools</span></b><em>→</em>
+          <b><span data-zh>OpenRA 引擎逐帧执行</span><span data-en>OpenRA engine, tick by tick</span></b>
         </div>
       </div>
-
       <ul data-zh>
-        <li>16 天累计完成 <b>143,040</b> 次，上线第 2 天单日 <b>88,196</b> 次。</li>
-        <li>完整版占 <b>63%</b>，作答时长中位数 <b>4 分钟</b>，说明多数用户愿意认真做完。</li>
-        <li>接入 Google Analytics，并自建逐题埋点（模式、时长、每题答案）分析结果分布。</li>
+        <li>17 个工具 + 2 个小队原语，覆盖钳形攻势、佯攻偷袭、路线约束、分时进攻等 10 类战术。</li>
+        <li>「人在回路」：玩家保留战略判断，AI 只做执行层副驾驶；LLM 不进逐帧循环，指令可审计。</li>
       </ul>
       <ul data-en>
-        <li><b>143,040</b> completed sessions in 16 days; <b>88,196</b> on day 2 alone.</li>
-        <li><b>63%</b> chose the full version; median session <b>4 minutes</b> — most people actually finished it properly.</li>
-        <li>Google Analytics plus my own per-answer event table (mode, duration, each answer) to study result distribution.</li>
+        <li>17 tools + 2 squad primitives cover 10 tactics: pincer, feint-and-raid, route constraints, timed assaults.</li>
+        <li>Human-in-the-loop: the player keeps strategy, the AI handles execution. The LLM stays out of the per-tick loop, so every order is auditable.</li>
       </ul>
-      <div class="lesson" data-zh>
-        <b>复盘：</b>服务器费用太高，我停了服，日完成量一天内从 3,745 掉到 189。这类测试本可以用静态托管加一个很轻的后端，成本几乎为零。
-        我学到的是：上线前就要算清楚流量成本，并想好流量来了以后怎么承接、怎么变现。
+      <div class="chips"><span>Python</span><span>MCP</span><span>LLM</span><span>Game AI</span></div>
+      <div class="links">
+        <a href="https://github.com/jiziyi-hue/openramcp" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://doi.org/10.5281/zenodo.20393182" target="_blank" rel="noopener"><span data-zh>预印本 ↗</span><span data-en>Preprint ↗</span></a>
       </div>
-      <div class="lesson" data-en>
-        <b>Retrospective:</b> hosting costs got too high, I shut the server down, and daily completions dropped from 3,745 to 189 overnight.
-        A static front end with a thin back end would have cost almost nothing. Lesson: model traffic cost — and how to capture and monetise a spike — before launch.
+    </article>
+
+    <div class="s2 stack">
+      <div class="card orange">
+        <div class="kicker"><span data-zh>皇帝测试</span><span data-en>Emperor quiz</span></div>
+        <div class="big">143,040</div>
+        <div class="tile-foot"><span data-zh>上线 16 天累计完成测试次数</span><span data-en>completed sessions in 16 days</span></div>
       </div>
-      <div class="tags"><span>JavaScript</span><span>Google Analytics</span><span>Growth</span><span>Data analysis</span></div>
-      <a class="more" href="https://github.com/jiziyi-hue/huangditest" target="_blank" rel="noopener">GitHub →</a>
+      <div class="card lime">
+        <div class="kicker"><span data-zh>单日峰值</span><span data-en>Peak day</span></div>
+        <div class="big">88,196</div>
+        <div class="tile-foot"><span data-zh>上线第 2 天</span><span data-en>on day 2</span></div>
+      </div>
+    </div>
+
+    <!-- Emperor test -->
+    <article class="card cream s6">
+      <div class="kicker"><span data-zh>02 · 网页游戏 · 2026.04 · 独立策划、开发与运营</span><span data-en>02 · Web game · Apr 2026 · solo design, build &amp; ops</span></div>
+      <h3><span data-zh>测测你骨子里最像哪位中国皇帝</span><span data-en>Which Chinese emperor are you?</span>
+        <small><span data-zh>36 道情境题 · 50 位皇帝 · 结果图鉴，专为截图分享设计</span><span data-en>36 scenarios · 50 emperors · a collectible gallery built to be screenshotted and shared</span></small></h3>
+      <div class="chart" aria-label="daily completions chart">
+        <svg viewBox="0 0 1000 220" role="img">
+          <title>Daily completed sessions, 13–28 Apr 2026</title>
+          <g id="bars"></g>
+          <line x1="20" y1="185" x2="980" y2="185" stroke="#e0cdb8"/>
+        </svg>
+        <div class="cap">
+          <span data-zh>每日完成测试次数（2026.04.13 – 04.28，自建埋点表）。灰色是 4 月 20 日停服之后。</span>
+          <span data-en>Daily completed sessions, 13–28 Apr 2026, from my own event table. Grey bars: after the server shutdown on 20 Apr.</span>
+        </div>
+      </div>
+      <ul data-zh>
+        <li>完整版占 <b>63%</b>，作答时长中位数 <b>4 分钟</b>：多数人愿意认真做完。</li>
+        <li>接入 Google Analytics，并自建逐题埋点（模式、时长、每题答案），用来分析结果分布和题目区分度。</li>
+      </ul>
+      <ul data-en>
+        <li><b>63%</b> chose the full version; median session <b>4 minutes</b>, so most people finished it properly.</li>
+        <li>Google Analytics plus my own per-answer event table (mode, duration, each answer) to study result distribution and how well each question separates players.</li>
+      </ul>
+      <div class="retro" data-zh>
+        <b>复盘：</b>服务器按流量计费太贵，停服后日完成量从 3,745 掉到 189；本可以用免费静态托管 + 轻量后端。
+        另外 35.2% 的结果都是汉武帝，分布过于集中，下一步会用逐题数据重新校准匹配。
+      </div>
+      <div class="retro" data-en>
+        <b>Retrospective:</b> traffic-billed hosting got too expensive; after shutdown, daily completions fell from 3,745 to 189. Free static hosting plus a thin back end would have done.
+        Also, 35.2% of results were the same emperor; the next step is recalibrating the matching with the per-answer data.
+      </div>
+      <div class="chips"><span>JavaScript</span><span>Supabase</span><span>Google Analytics</span><span><span data-zh>增长复盘</span><span data-en>Growth</span></span></div>
+      <div class="links"><a href="https://github.com/jiziyi-hue/huangditest" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </article>
+
+    <!-- Linxin -->
+    <article class="card green s3">
+      <div class="kicker"><span data-zh>03 · 微信小程序 · 腾讯云开发</span><span data-en>03 · WeChat mini-program · Tencent CloudBase</span></div>
+      <h3><span data-zh>「邻信」陪诊师随身助手</span><span data-en>Linxin</span>
+        <small><span data-zh>把一次陪诊从接单到诊后跟进装进手机</span><span data-en>A pocket assistant for medical escorts, from booking to follow-up</span></small></h3>
+      <div class="mini-stats">
+        <div><b>15</b><span data-zh>个页面</span><span data-en>pages</span></div>
+        <div><b>4</b><span data-zh>个云函数</span><span data-en>cloud functions</span></div>
+        <div><b><span data-zh>1.1 万</span><span data-en>11K</span></b><span data-zh>行代码</span><span data-en>lines of code</span></div>
+      </div>
+      <ul data-zh>
+        <li><b>AI 解读医嘱：</b>调用混元大模型，把医嘱和检查报告翻译成家属看得懂的话；用 LLM 分析陪诊任务，自动生成后续流程。</li>
+        <li><b>现场记录：</b>拍照 + OCR 识别报告，录音实时转文字。</li>
+        <li><b>给家属的交付：</b>进度实时分享（小程序卡片 + H5），一键生成 PDF 服务报告。</li>
+        <li><b>运营侧：</b>H5 管理后台，多陪诊师数据隔离，金银铜牌认证体系。</li>
+      </ul>
+      <ul data-en>
+        <li><b>AI reads the doctor's notes:</b> the Hunyuan LLM explains notes and reports in plain language; an LLM turns a visit into follow-up steps.</li>
+        <li><b>On-site capture:</b> photos + OCR for reports, live speech-to-text.</li>
+        <li><b>For families:</b> live progress sharing (mini-program card + H5) and a one-tap PDF service report.</li>
+        <li><b>Ops side:</b> H5 admin dashboard, per-escort data isolation, gold/silver/bronze certification.</li>
+      </ul>
+      <div class="verdict" data-zh><b>验证：</b>付费请一位在职陪诊师实际试用，她的评价是「比较鸡肋」。我据此判断需求不成立，停止继续开发。</div>
+      <div class="verdict" data-en><b>Validation:</b> I paid a working medical escort to use it for real. Her verdict was “not that useful”, so I stopped building.</div>
+      <div class="chips"><span><span data-zh>微信云开发</span><span data-en>WeChat CloudBase</span></span><span><span data-zh>混元大模型</span><span data-en>Hunyuan LLM</span></span><span>OCR</span><span>jsPDF</span></div>
+      <div class="links"><a href="https://github.com/jiziyi-hue/-AI-" target="_blank" rel="noopener">GitHub ↗</a></div>
     </article>
 
     <!-- Obsidian diary bot -->
-    <article class="project">
-      <h3>Obsidian Diary Bot <span data-zh>· AI 日记陪伴机器人</span><span data-en>· AI journaling companion</span></h3>
-      <div class="meta"><span data-zh>2026.05 · 独立设计与开发 · 开源</span><span data-en>May 2026 · solo design &amp; build · open source</span></div>
-      <p data-zh>在 Telegram 里随手写，AI 陪你聊几句、帮你反思，然后自动整理成 Obsidian 日记，附时间线、人物关系图和心情热力图。</p>
-      <p data-en>Write in Telegram whenever you like; an AI companion reflects with you, then files it as an Obsidian daily note with a timeline, people graph and mood heatmap.</p>
+    <article class="card purple s3">
+      <div class="kicker"><span data-zh>04 · AI 陪伴 · 2026.05 · 开源</span><span data-en>04 · AI companion · May 2026 · open source</span></div>
+      <h3>Obsidian Diary Bot<small><span data-zh>在 Telegram 里聊着天就把日记写了</span><span data-en>Journaling by just chatting in Telegram</span></small></h3>
+      <p data-zh>随手记录，AI 陪你聊几句、帮你反思，自动整理成 Obsidian 日记，附时间线、人物关系图和心情热力图。</p>
+      <p data-en>Write whenever you like; an AI companion reflects with you, then files it as an Obsidian daily note with a timeline, people graph and mood heatmap.</p>
+      <div class="mini-stats">
+        <div><b>60%</b><span data-zh>反思追问</span><span data-en>reflect &amp; ask</span></div>
+        <div><b>25%</b><span data-zh>纯共情</span><span data-en>pure empathy</span></div>
+        <div><b>15%</b><span data-zh>指出规律</span><span data-en>spot patterns</span></div>
+      </div>
       <ul data-zh>
-        <li><b>按生活领域聊：</b>工作、家庭、朋友、健康等 8 个话题，每个话题各自积累一份「你在这方面是什么样的人」的画像。</li>
-        <li><b>不让 AI 千篇一律：</b>回复策略按比例设计，60% 反思加追问，25% 纯共情，15% 指出你自己没注意到的规律。</li>
-        <li><b>零成本运行：</b>Cloudflare Worker + D1/KV + DeepSeek API，全在免费额度内；笔记写进你自己的 Obsidian 库。</li>
+        <li>回复策略按比例设计，避免 AI 千篇一律。</li>
+        <li>按工作、家庭、健康等 8 个生活领域组织对话，每个领域各自积累用户画像。</li>
+        <li>Cloudflare Worker + D1/KV + DeepSeek API，全在免费额度内，零运营成本。</li>
       </ul>
       <ul data-en>
-        <li><b>Organised by life area:</b> 8 topics (work, family, friends, health …), each building its own profile of who you are in that area.</li>
-        <li><b>Never formulaic:</b> replies are deliberately mixed — 60% reflect-and-ask, 25% pure empathy, 15% pointing out patterns you hadn’t noticed.</li>
-        <li><b>Zero running cost:</b> Cloudflare Worker + D1/KV + DeepSeek API on free tiers; notes land in your own vault.</li>
+        <li>Reply styles are deliberately mixed so the AI never feels formulaic.</li>
+        <li>8 life areas (work, family, health …), each building its own user profile.</li>
+        <li>Cloudflare Worker + D1/KV + DeepSeek API, all on free tiers: zero running cost.</li>
       </ul>
-      <div class="tags"><span>TypeScript</span><span>Cloudflare Workers</span><span>LLM</span><span>Obsidian plugin</span></div>
-      <a class="more" href="https://github.com/jiziyi-hue/obsidian-diary-bot" target="_blank" rel="noopener">GitHub →</a>
+      <div class="chips"><span>TypeScript</span><span>Cloudflare Workers</span><span>LLM</span><span><span data-zh>Obsidian 插件</span><span data-en>Obsidian plugin</span></span></div>
+      <div class="links"><a href="https://github.com/jiziyi-hue/obsidian-diary-bot" target="_blank" rel="noopener">GitHub ↗</a></div>
     </article>
-
-
-
-    <div>
-      <div class="mini">
-        <b><span data-zh>「邻信」陪诊师助手小程序</span><span data-en>Linxin — mini-program for medical escorts</span></b>
-        <span data-zh>微信云开发 + 混元大模型，把医嘱和检查报告解读成家属看得懂的话，还能用 LLM 分析任务、生成后续流程。付费请一位陪诊师试用，反馈是「比较鸡肋」，判断需求不成立后停止开发。</span>
-        <span data-en>Built on WeChat CloudBase: the Hunyuan LLM explains doctors' notes in plain language, and an LLM turns a task description into follow-up steps. Paid a working medical escort to test it; the verdict was “not that useful”, so I stopped.</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="research">
-    <h2><span data-zh>研究</span><span data-en>Research</span></h2>
-    <ul>
-      <li data-zh>中国与东盟贸易研究论文（在投）</li>
-      <li data-en>Paper on China–ASEAN trade (under review)</li>
-      <li><i>Natural-Language Tactical Control for RTS Games via MCP-Based Mixed-Initiative Co-Piloting</i>, Ji Ziyi, Zenodo preprint, 2026.
-        <a href="https://doi.org/10.5281/zenodo.20393182" target="_blank" rel="noopener">DOI</a></li>
-    </ul>
-  </section>
-
-  <section id="experience">
-    <h2><span data-zh>经历</span><span data-en>Experience</span></h2>
-    <div class="timeline">
-      <div class="item">
-        <div class="when"><span data-zh>2026.03 – 2027.08（预计）</span><span data-en>Mar 2026 – Aug 2027 (exp.)</span></div>
-        <div><b><span data-zh>马来西亚理工大学 · 数据科学硕士</span><span data-en>Universiti Teknologi Malaysia · M.Sc. Data Science</span></b></div>
-      </div>
-      <div class="item">
-        <div class="when">2024.07 – 2025.09</div>
-        <div><b><span data-zh>自主创业 · 初高中物理教培</span><span data-en>Self-employed · physics tutoring business</span></b><br>
-          <span data-zh>自己调研、立项、招生，靠线上推广和老带新把课表排满；之后评估长期模式，主动收尾去读研。</span>
-          <span data-en>Researched the market, launched, and filled my schedule through online promotion and referrals; later wound it down to pursue graduate study.</span></div>
-      </div>
-      <div class="item">
-        <div class="when">2022.05 – 2024.06</div>
-        <div><b><span data-zh>快乐学习培英班 · 物理讲师</span><span data-en>Kuaile Xuexi Peiying Class · physics teacher</span></b><br>
-          <span data-zh>班级从 40 人做到峰值 200+ 人，续报率保持 80% 以上；主持家长宣讲会，负责教研和教材编写。</span>
-          <span data-en>Grew my class from 40 to a peak of 200+ students with 80%+ re-enrolment; ran parent seminars and wrote course materials.</span></div>
-      </div>
-      <div class="item">
-        <div class="when">2018.09 – 2023.03</div>
-        <div><b><span data-zh>华侨大学 · 工程管理本科</span><span data-en>Huaqiao University · B.Eng. Engineering Management</span></b></div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer id="contact">
-  <div class="wrap">
-    <span data-zh>联系我：</span><span data-en>Get in touch: </span>
-    <a href="mailto:jiziyi@graduate.utm.my">jiziyi@graduate.utm.my</a> ·
-    <a href="https://github.com/jiziyi-hue" target="_blank" rel="noopener">github.com/jiziyi-hue</a>
-    <span data-zh> · 现居吉隆坡</span><span data-en> · based in Kuala Lumpur</span>
   </div>
-</footer>
+
+  <div class="label" id="about"><span data-zh>经历与研究</span><span data-en>Background</span></div>
+
+  <div class="bento">
+    <div class="card s4">
+      <div class="kicker"><span data-zh>经历</span><span data-en>Experience &amp; education</span></div>
+      <div class="tl">
+        <div><span class="when"><span data-zh>2026.03 – 2027.08（预计）</span><span data-en>Mar 2026 – Aug 2027 (exp.)</span></span>
+          <span><b><span data-zh>马来西亚理工大学 · 数据科学硕士</span><span data-en>Universiti Teknologi Malaysia · M.Sc. Data Science</span></b></span></div>
+        <div><span class="when">2024.07 – 2025.09</span>
+          <span><b><span data-zh>自主创业 · 初高中物理教培</span><span data-en>Self-employed · physics tutoring business</span></b>
+          <span class="d" data-zh>自己调研立项，靠线上推广和老带新把课表排满；之后评估长期模式，主动收尾去读研。</span>
+          <span class="d" data-en>Launched from my own market research and filled my schedule through online promotion and referrals; later wound it down for graduate study.</span></span></div>
+        <div><span class="when">2022.05 – 2024.06</span>
+          <span><b><span data-zh>快乐学习培英班 · 物理讲师</span><span data-en>Kuaile Xuexi Peiying Class · physics teacher</span></b>
+          <span class="d" data-zh>班级从 40 人做到峰值 200+ 人，续报率 80% 以上；主持家长宣讲会，负责教研和教材编写。</span>
+          <span class="d" data-en>Grew my class from 40 to a peak of 200+ students with 80%+ re-enrolment; ran parent seminars and wrote course materials.</span></span></div>
+        <div><span class="when">2018.09 – 2023.03</span>
+          <span><b><span data-zh>华侨大学 · 工程管理本科</span><span data-en>Huaqiao University · B.Eng. Engineering Management</span></b></span></div>
+      </div>
+    </div>
+    <div class="s2 stack">
+      <div class="card ink">
+        <div class="kicker"><span data-zh>教培</span><span data-en>Teaching</span></div>
+        <div class="big" style="font-size:clamp(40px,4.4vw,56px)">40→200+</div>
+        <div class="tile-foot"><span data-zh>班级规模，续报率 80%+</span><span data-en>students per class, 80%+ re-enrolment</span></div>
+      </div>
+      <div class="card">
+        <div class="kicker"><span data-zh>研究</span><span data-en>Research</span></div>
+        <p style="margin-top:8px"><a href="https://doi.org/10.5281/zenodo.20393182" target="_blank" rel="noopener"><i>Natural-Language Tactical Control for RTS Games via MCP-Based Mixed-Initiative Co-Piloting</i></a>
+          <span data-zh>，Zenodo 预印本，2026</span><span data-en>, Zenodo preprint, 2026</span></p>
+        <p style="margin:0"><span data-zh>中国与东盟贸易研究论文（在投）</span><span data-en>Paper on China–ASEAN trade (under review)</span></p>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="card ink contact" style="margin-top:48px">
+      <div class="kicker"><span data-zh>联系</span><span data-en>Contact</span></div>
+      <h2><span data-zh>一起聊聊？</span><span data-en>Let's talk.</span></h2>
+      <div class="cta">
+        <a class="btn dark" href="mailto:jiziyi@graduate.utm.my">jiziyi@graduate.utm.my</a>
+        <a class="btn light" href="https://github.com/jiziyi-hue" target="_blank" rel="noopener">github.com/jiziyi-hue</a>
+      </div>
+    </div>
+    <div class="fine"><span data-zh>现居吉隆坡 · 2026</span><span data-en>Based in Kuala Lumpur · 2026</span></div>
+  </footer>
+
+</div>
 
 <script>
   // Daily completed sessions, 2026-04-13 .. 2026-04-28 (from game_analytics_rows.csv)
   const daily = [4115, 88196, 8500, 19548, 7864, 10558, 3745, 189, 59, 64, 62, 24, 20, 10, 29, 57];
   const g = document.getElementById('bars');
-  const max = Math.max(...daily), x0 = 30, w = 600 / daily.length, h = 140, base = 160;
+  const max = Math.max(...daily), x0 = 20, w = 960 / daily.length, h = 155, base = 185;
   const NS = 'http://www.w3.org/2000/svg';
   daily.forEach((v, i) => {
-    const bh = Math.max(1, v / max * h);
+    const bh = Math.max(2, v / max * h);
     const r = document.createElementNS(NS, 'rect');
-    r.setAttribute('x', x0 + i * w + 4); r.setAttribute('y', base - bh);
-    r.setAttribute('width', w - 8); r.setAttribute('height', bh); r.setAttribute('rx', 2);
-    r.setAttribute('fill', i >= 7 ? '#d08a1b' : '#1f4e79');
+    r.setAttribute('x', x0 + i * w + 6); r.setAttribute('y', base - bh);
+    r.setAttribute('width', w - 12); r.setAttribute('height', bh); r.setAttribute('rx', 6);
+    r.setAttribute('fill', i >= 7 ? '#c9bfb3' : '#ff6a1f');
     const t = document.createElementNS(NS, 'title'); t.textContent = `4/${13 + i}: ${v.toLocaleString()}`;
     r.appendChild(t); g.appendChild(r);
     if (v > 5000 || i === 6 || i === 7) {
       const lab = document.createElementNS(NS, 'text');
-      lab.setAttribute('x', x0 + i * w + w / 2); lab.setAttribute('y', base - bh - 5);
-      lab.setAttribute('text-anchor', 'middle'); lab.setAttribute('font-size', '11'); lab.setAttribute('fill', '#555');
+      lab.setAttribute('x', x0 + i * w + w / 2); lab.setAttribute('y', base - bh - 7);
+      lab.setAttribute('text-anchor', 'middle'); lab.setAttribute('font-size', '15'); lab.setAttribute('font-weight', '700'); lab.setAttribute('fill', '#333');
       lab.textContent = v.toLocaleString(); g.appendChild(lab);
     }
     if (i % 3 === 0) {
       const d = document.createElementNS(NS, 'text');
-      d.setAttribute('x', x0 + i * w + w / 2); d.setAttribute('y', 178);
-      d.setAttribute('text-anchor', 'middle'); d.setAttribute('font-size', '11'); d.setAttribute('fill', '#888');
+      d.setAttribute('x', x0 + i * w + w / 2); d.setAttribute('y', 207);
+      d.setAttribute('text-anchor', 'middle'); d.setAttribute('font-size', '14'); d.setAttribute('fill', '#8a7f73');
       d.textContent = `4/${13 + i}`; g.appendChild(d);
     }
   });
